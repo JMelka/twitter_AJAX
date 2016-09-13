@@ -1,0 +1,26 @@
+{
+  "name": "twitter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JMelka/twitter.git"
+  },
+  "author": "John and Haritha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JMelka/twitter/issues"
+  },
+  "homepage": "https://github.com/JMelka/twitter#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "chai": "^3.5.0",
+    "express": "^4.14.0",
+    "mocha": "^3.0.2",
+    "sqlite": "^2.2.0"
+  }
+}
