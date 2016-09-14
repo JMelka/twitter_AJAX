@@ -55,12 +55,14 @@ app.post('/insertTweet/:name/:message', urlencodedParser, function (req, res) {
 })
 
 app.get('/getTweets/:userId', function (req, res) {
-    var id = req.params.userid;
-    var tweets = {};
-    //var tweets = dbFile.getTweets(id);
-    res.send({tweets});
-        dbFile.getTweets(id).then(
+    var id = req.params.userId;
+    //var tweets = {};
+    var theTweets = dbFile.getTweets(id);
+    //res.send({tweets});
+    //dbFile.getTweets(id).then(
+    theTweets.then(
         (tweets) => {
+            //console.log("app.get getTweets tweets: " + tweets);
             res.send(tweets);
         }
     ).catch(
@@ -68,7 +70,7 @@ app.get('/getTweets/:userId', function (req, res) {
             res.status(500);
             res.send('getTweets error: issue getting Tweets');
         }
-    );
+        );
 })
 
 

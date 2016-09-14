@@ -42,15 +42,17 @@ function insertTweet(userName, msg) {
 }
 
 function getTweets(userId) {
+    console.log("db.js getTweets(userId): " + userId)
     return new Promise(function (resolve, reject) {
         var stmt = "SELECT rowid as Id, Msg as Msg, Insrt_TS as Date FROM Tweet where UserId = ?";
-        db.each(stmt, userId, function (err, rows) {
+        db.all(stmt, userId, function (err, rows) {
             if (err) {
                 reject(err);
                 return;
             }
-            console.log("db.js rows" + rows)
+            
             resolve(rows);
+            //resolve({Message: rows.Msg, Date: rows.Date});
         });
     });
 }
@@ -75,21 +77,6 @@ function insertUser(name, profile, password, loginName) {
     stmt.finalize();
 }
 
-function getUser() {
-    return new Promise(function (resolve, reject) {
-        db.all("SELECT rowid as Id, Name AS Name FROM User", function (err, rows) {
-            if (err) {
-                console.log(err);
-                reject(err);
-            } else {
-                console.log(rows);
-                resolve(rows);
-            }
-        });
-    });
-
-}
-
 function getUserId(userName, cb) {
     var stmt = "SELECT rowid as Id FROM User where Name = ?";
     db.each(stmt, userName, function (err, row) {
@@ -107,11 +94,25 @@ function getUserId(userName, cb) {
     });
 }
 
-
 function updateUser(name, loginName){
     var stmt = db.prepare("Update User Set Name = ? where LoginName = ?");
     stmt.run(name, loginName);
     stmt.finalize();
+}
+
+function getUsers() {
+    return new Promise(function (resolve, reject) {
+        db.all("SELECT rowid as Id, Name AS Name FROM User", function (err, rows) {
+            if (err) {
+                console.log(err);
+                reject(err);
+            } else {
+                console.log(rows);
+                resolve(rows);
+            }
+        });
+    });
+
 }
 
 // function deleteUser(db){
@@ -135,6 +136,7 @@ function insertLike(userId, tweetId){
 exports.initDB = initDB;
 exports.insertUser = insertUser;
 exports.insertTweet = insertTweet;
+exports.getUsers = getUsers;
 exports.getUserId = getUserId;
 exports.updateUser = updateUser;
 exports.getTweets = getTweets;

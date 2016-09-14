@@ -4,6 +4,7 @@
 //AJAX request
 var submitButton = document.getElementById("submitButton");
 var submitMessage = document.getElementById("submitMessage");
+var submitGetTweets = document.getElementById("submitGetTweets");
 
 //var name = document.getElementById("name");
 //var password = document.getElementById("password");
@@ -41,6 +42,13 @@ submitMessage.onclick = function (event) {
     //console.log(message.value);
     //login(name.value);
     insertTweet(userName2.value, message.value);
+
+};
+
+submitGetTweets.onclick = function (event) {
+    //event.preventDefault();
+    var userId = document.getElementById("loginResults");
+    getTweetFeed(userId);
 
 };
 
@@ -107,7 +115,8 @@ function insertTweet(name, message) {
     xhttp.open("POST", "/insertTweet/" + name + "/" + message, true);
     xhttp.send();
 
-    login(name);
+    login(name); 
+    //getTweetFeed(user.userId);
 }
 
 function getTweetFeed(id) {
@@ -129,8 +138,10 @@ function getTweetFeed(id) {
 
 function printTweets(tweets) {
     var tweetArea = document.getElementById("tweetArea");;
-    console.log(tweets);
-    tweetArea.innerHTML = "<b>Tweets:  </b>" + tweets.message;
+    for (var tweet of tweets) {
+        tweetArea.innerHTML += "<b>Tweet Id:  </b>" + tweet.Id + " <b>Message:  </b>" + tweet.Msg + " <b>Date:  </b>" + tweet.Date + "<br>";
+    }
+    
 
 }
 
