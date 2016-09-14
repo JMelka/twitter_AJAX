@@ -16,9 +16,20 @@ submitButton.onclick = function (event) {
     var name = document.getElementById("name");
     var password = document.getElementById("password");
     //login(name.value);
-    console.log(name.value);
+    //console.log(name.value);
 
     createUser(name.value, password.value);
+
+};
+
+submitLogin.onclick = function (event) {
+    //event.preventDefault();
+    var name = document.getElementById("loginname");
+    var password = document.getElementById("loginpassword");
+    login(name.value);
+    //console.log(name.value);
+
+    //createUser(name.value, password.value);
 
 };
 
@@ -69,9 +80,11 @@ function login(name) {
 
 function printUserId(user, name) {
     var sr = document.getElementById("searchResults");
+    var lr = document.getElementById("loginResults");
     var userName = document.getElementById("userName");
 
     sr.innerHTML = "<b>User Id:  </b>" + user.userId;
+    lr.innerHTML = "<b>User Id:  </b>" + user.userId;
     userName.value = name;
 
 }

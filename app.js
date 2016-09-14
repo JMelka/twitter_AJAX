@@ -45,11 +45,11 @@ app.post('/insertUser/:name/:password', urlencodedParser, function (req, res) {
     res.send({userName: req.params.name});
 })
 
-app.post('/insertTweet/:id/:message', urlencodedParser, function (req, res) {
+app.post('/insertTweet/:name/:message', urlencodedParser, function (req, res) {
 
-    dbFile.insertTweet(req.params.id, req.params.message);
+    dbFile.insertTweet(req.params.name, req.params.message);
 
-    res.send({userId: req.params.id, tweet: req.params.message});
+    res.send({userName: req.params.name, tweet: req.params.message});
 })
 
 

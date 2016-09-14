@@ -4,6 +4,8 @@
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('Twitter.db');
 
+//var Promise = require('promise');
+
 
 //initDB(db);
 
@@ -39,9 +41,18 @@ function insertTweet(userName, msg) {
 
 }
 
-// function getTweet(db){
-
-// }
+function getTweets(userId) {
+    return new Promise(function (resolve, reject) {
+        var stmt = "SELECT rowid as Id, Msg as Msg, Insrt_TS as Date FROM Tweet where UserId = ?";
+        db.each(stmt, userId, function (err, rows) {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(rows);
+        });
+    });
+}
 
 // function updateTweet(db){
 

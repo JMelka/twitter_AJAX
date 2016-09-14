@@ -4,11 +4,16 @@
 <head>
 <title>Twitter Clone</title>
 
+<link rel="stylesheet" href="static/twitter.css">
+
 
 </head>
 
 <body>
 
+<h1>Twitter Clone<h1>    
+
+<h2>Create User</h2>
 
 Name: <input type="text" name="name" id="name">  <br>
 Password: <input type="text" name="password" id="password">
@@ -16,18 +21,55 @@ Password: <input type="text" name="password" id="password">
 <input type="submit" value="Submit" id="submitButton">
 
 <br><br>
-<div id="searchResults" style="border:thin">
-    Search Results
+<div id="searchResults" style="border:none;">
+    Search Results Here.
 </div>
 
-User Name: <input type="text" name="message" id="userName">
+<br>
+<hr>
+<br>
+
+<h2>Login</h2>
+
+Name: <input type="text" name="name" id="loginname">  <br>
+Password: <input type="text" name="password" id="loginpassword">
+<br>
+<input type="submit" value="Submit" id="submitLogin">
+
+<br><br>
+<div id="loginResults" style="border:none;">
+    Login Results Here.
+</div>
+
+<br>
+<hr>
+<br>
+
+<h2>Create Tweet</h2>
+
+User Name: <input type="text" name="message" id="userName" readonly="readonly"> <br>
 Message: <input type="text" name="message" id="message"> 
 <br>
 <input type="submit" value="Submit" id="submitMessage">
 
 <script src="static/twitter.js"></script>
 
+<br><br>
 
+<br>
+<hr>
+<br>
+
+<h2>Tweet Feed</h2>
+
+<br>
+<div id="TweetArea" style="border:none;">
+    Tweets Here.
+    <div id="Author">Author</div>
+    <div id="Date">Date</div>
+    <div id="Content">Content</div>
+</div>
+</div>
 
 </body>
 </html>
