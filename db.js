@@ -49,6 +49,7 @@ function getTweets(userId) {
                 reject(err);
                 return;
             }
+            console.log("db.js rows" + rows)
             resolve(rows);
         });
     });
@@ -136,6 +137,7 @@ exports.insertUser = insertUser;
 exports.insertTweet = insertTweet;
 exports.getUserId = getUserId;
 exports.updateUser = updateUser;
+exports.getTweets = getTweets;
 
 
 //wrapping in transactions.

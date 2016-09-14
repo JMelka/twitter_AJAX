@@ -27,6 +27,7 @@ submitLogin.onclick = function (event) {
     var name = document.getElementById("loginname");
     var password = document.getElementById("loginpassword");
     login(name.value);
+    //getTweetFeed(id.)
     //console.log(name.value);
 
     //createUser(name.value, password.value);
@@ -42,7 +43,6 @@ submitMessage.onclick = function (event) {
     insertTweet(userName2.value, message.value);
 
 };
-
 
 function createUser(name, password) {
     var xhttp = new XMLHttpRequest();
@@ -87,7 +87,11 @@ function printUserId(user, name) {
     lr.innerHTML = "<b>User Id:  </b>" + user.userId;
     userName.value = name;
 
+    getTweetFeed(user.userId);
+
 }
+
+
 
 function insertTweet(name, message) {
     var xhttp = new XMLHttpRequest();
@@ -104,6 +108,30 @@ function insertTweet(name, message) {
     xhttp.send();
 
     login(name);
+}
+
+function getTweetFeed(id) {
+    console.log("TweetFeed id: " + id);
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+
+        if (this.readyState === 4 && this.status === 200) {
+            var data = JSON.parse(this.responseText);
+            
+            console.log(data);
+            printTweets(data);
+        }
+    };
+
+    xhttp.open("GET", "/getTweets/" + id, true);
+    xhttp.send();
+}
+
+function printTweets(tweets) {
+    var tweetArea = document.getElementById("tweetArea");;
+    console.log(tweets);
+    tweetArea.innerHTML = "<b>Tweets:  </b>" + tweets.message;
+
 }
 
 // function printNewUser(user) {

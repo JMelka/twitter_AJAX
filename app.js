@@ -7,6 +7,8 @@ var app = express();
 
 var bodyParser = require('body-parser');
 
+var Promise = require('promise');
+
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
@@ -50,6 +52,23 @@ app.post('/insertTweet/:name/:message', urlencodedParser, function (req, res) {
     dbFile.insertTweet(req.params.name, req.params.message);
 
     res.send({userName: req.params.name, tweet: req.params.message});
+})
+
+app.get('/getTweets/:userId', function (req, res) {
+    var id = req.params.userid;
+    var tweets = {};
+    //var tweets = dbFile.getTweets(id);
+    res.send({tweets});
+        dbFile.getTweets(id).then(
+        (tweets) => {
+            res.send(tweets);
+        }
+    ).catch(
+        (err) => {
+            res.status(500);
+            res.send('getTweets error: issue getting Tweets');
+        }
+    );
 })
 
 
